@@ -9,7 +9,7 @@
 /* Forward declaration for graph struct, we define it immediately after node struct below */
 typedef struct RG_Graph RG_Graph;
 
-typedef bool8 (*RG_NodeFN)(RG_Graph* graph, void* user_data);
+typedef bool8 (*RG_NodeFn)(RG_Graph* graph, void* user_data);
 
 typedef struct {
   const char*   name;
@@ -21,15 +21,15 @@ typedef struct {
 } RG_Node;
 
 struct RG_Graph {
-  RG_Node       node[RG_GRAPH_MAX_NODES];
+  RG_Node       nodes[RG_GRAPH_MAX_NODES];
   u32           node_count;
   bool8         running;
 };
 
 void  rg_graph_init     (RG_Graph* graph);
 bool8 rg_graph_add_node (RG_Graph* graph, RG_Node node);
-bool8 rg_graph_start    (RG_graph* graph);
-bool8 rg_graph_update   (RG_graph* graph);
+bool8 rg_graph_start    (RG_Graph* graph);
+bool8 rg_graph_update   (RG_Graph* graph);
 void  rg_graph_shutdown (RG_Graph* graph);
 
 #endif /* RG_GRAPH_H */

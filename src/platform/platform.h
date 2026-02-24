@@ -4,11 +4,11 @@
 #include "core/types.h"
 #include "graph/graph.h"
 
-typdef struct {
+typedef struct {
   const char* title;
   i32         width;
   i32         height;
-} RG_WindowConfig
+} RG_WindowConfig;
 
 typedef struct {
   void*           window;

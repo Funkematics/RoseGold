@@ -57,10 +57,10 @@ bool8 rg_graph_update(RG_Graph* graph)
 
   u32 i;
 
-  for (i = graph->node_count; i > 0U; i--) {
-    RG_Node* node = &graph->nodes[i - 1U];
+  for (i = 0U; i < graph->node_count; i++) {
+    RG_Node* node = &graph->nodes[i];
 
-    if (node->active != RG_TRUE || node->shutdown == RG_NULL) { continue; }
+    if (node->active != RG_TRUE || node->update == RG_NULL) { continue; }
 
     bool8 ok = node->update(graph, node->user_data);
     if(ok != RG_TRUE) {
@@ -79,7 +79,7 @@ void rg_graph_shutdown(RG_Graph* graph)
 
   u32 i;
   //teardown in reverse order
-  for (i = graph->node-count; i > 0U; i--) {
+  for (i = graph->node_count; i > 0U; i--) {
     RG_Node* node = &graph->nodes[i - 1U];
 
     if (node->active != RG_TRUE || node->shutdown == RG_NULL) { continue; }

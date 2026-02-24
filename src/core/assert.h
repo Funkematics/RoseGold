@@ -7,7 +7,7 @@
 /* Prints file, line number, failed expression and abort on failure */
 #define RG_ASSERT(expr)                   \
   do {                                    \
-    if (!(expre)) {                       \
+    if (!(expr)) {                       \
       fprintf(stderr,                     \
         "[ASSERT FAIL] %s:%d  expr %s\n", \
         __FILE__, __LINE__, #expr);       \

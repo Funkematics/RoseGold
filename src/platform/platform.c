@@ -17,7 +17,7 @@ static bool8 platform_init(RG_Graph* graph, void* user_data)
   }
 
   glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-  glfwWindowHint(GLFW_RESIZEABLE, GLFW_FALSE);
+  glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
   GLFWwindow* window = glfwCreateWindow(
     state->config.width,
@@ -42,11 +42,11 @@ static bool8 platform_init(RG_Graph* graph, void* user_data)
 
 static bool8 platform_update(RG_Graph* graph, void* user_data)
 {
-  RG_ASSERT(graph != NULL);
+  RG_ASSERT(graph != RG_NULL);
   RG_ASSERT(user_data != RG_NULL);
 
   RG_PlatformState* state   = (RG_PlatformState*)user_data;
-  GLFWWindow*       window  = (GLFWwindow*)state->window;
+  GLFWwindow*       window  = (GLFWwindow*)state->window;
 
   RG_ASSERT(window != RG_NULL);
 
