@@ -29,6 +29,20 @@ bool8 rg_graph_add_node(RG_Graph* graph, RG_Node node)
   return RG_TRUE;
 }
 
+static void graph_shutdown_range(RG_Graph* graph, u32 count)
+{
+  RG_ASSERT(graph != RG_NULL);
+  RG_ASSERT(count <= graph->node_count);
+
+  u32 i;
+  for (i = count; i > 0U; i--) {
+    RG_Node* node = &graph->nodes[i - 1U];
+
+    if (node->active != RG_TRUE || node->shutdown == RG_NULL) { continue; }
+    (void)node->shutdown(graph, node->user_data);
+  }
+}
+
 bool8 rg_graph_start(RG_Graph* graph)
 {
   RG_ASSERT(graph != RG_NULL);
@@ -43,6 +57,7 @@ bool8 rg_graph_start(RG_Graph* graph)
     bool8 ok = node->init(graph, node->user_data);
     if (ok != RG_TRUE) {
       fprintf(stderr, "[GRAPH] Node '%s' init failed\n", node->name);
+      graph_shutdown_range(graph, i);
       return RG_FALSE;
     }
   }
@@ -77,14 +92,7 @@ void rg_graph_shutdown(RG_Graph* graph)
   RG_ASSERT(graph != RG_NULL);
   RG_ASSERT(graph->node_count <= RG_GRAPH_MAX_NODES);
 
-  u32 i;
-  //teardown in reverse order
-  for (i = graph->node_count; i > 0U; i--) {
-    RG_Node* node = &graph->nodes[i - 1U];
-
-    if (node->active != RG_TRUE || node->shutdown == RG_NULL) { continue; }
-    (void)node->shutdown(graph, node->user_data);
-  }
+  graph_shutdown_range(graph, graph->node_count);
   graph->running = RG_FALSE;
 }
 
