@@ -57,7 +57,7 @@ bool8 rg_graph_start(RG_Graph* graph)
     bool8 ok = node->init(graph, node->user_data);
     if (ok != RG_TRUE) {
       fprintf(stderr, "[GRAPH] Node '%s' init failed\n", node->name);
-      graph_shutdown_range(graph, i);
+      graph_shutdown_range(graph, i); //go through nodes backwards, clean up memory
       return RG_FALSE;
     }
   }

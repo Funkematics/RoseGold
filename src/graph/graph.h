@@ -26,11 +26,10 @@ struct RG_Graph {
   bool8         running;
 };
 
-void  rg_graph_init     (RG_Graph* graph);
-bool8 rg_graph_add_node (RG_Graph* graph, RG_Node node);
-bool8 rg_graph_start    (RG_Graph* graph);
-void rg_graph_shutdown_range(RG_Graph* graph, u32 count);
-bool8 rg_graph_update   (RG_Graph* graph);
-void  rg_graph_shutdown (RG_Graph* graph);
+void  rg_graph_init           (RG_Graph* graph);
+bool8 rg_graph_add_node       (RG_Graph* graph, RG_Node node);
+bool8 rg_graph_start          (RG_Graph* graph);
+bool8 rg_graph_update         (RG_Graph* graph);
+void  rg_graph_shutdown       (RG_Graph* graph);
 
 #endif /* RG_GRAPH_H */
